@@ -7,7 +7,7 @@ const Chatbot = () => {
     {
       sender: "bot",
       type: "text",
-      content: "Hi 👋 Welcome to Cova Kicks! Ask me about shoes."
+      content: "Hey 👋 Welcome to Cova Kicks! Ask me about shoes."
     }
   ]);
   const [input, setInput] = useState("");
