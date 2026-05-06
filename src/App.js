@@ -19,6 +19,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from './components/Home';
+import Chatbot from "./components/Chatbot";
 
 
 
@@ -53,7 +54,10 @@ function App() {
   <i className="bi bi-whatsapp"></i>
 </a>
 
+
+
           <Footer />
+          <Chatbot />
         </div>
       </BrowserRouter>
       

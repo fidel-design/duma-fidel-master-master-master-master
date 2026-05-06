@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
       <div className="row">
 
         {/* Product 1 */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-6 mb-3">
           <div
             className="card shadow"
             style={{ cursor: "pointer" }}
@@ -39,7 +39,7 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Product 2 */}
-        <div className="col-md-4 mb-3">
+        <div className="col-md-6 mb-3">
           <div
             className="card shadow"
             style={{ cursor: "pointer" }}

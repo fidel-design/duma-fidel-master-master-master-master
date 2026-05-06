@@ -19,7 +19,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔍 suggestions logic
+  // suggestions logic
   const suggestions = products.filter((p) => {
     const query = search.toLowerCase().trim();
     const name = p.product_name.toLowerCase();
@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar navbar-expand-md navbar-light bg-secondary px-3 fixed-top ${
+      className={`navbar navbar-expand-md navbar-light scroll-margin-top: 100px; bg-secondary px-3 fixed-top ${
         scrolled ? "navbar-scrolled" : ""
       }`}
     >
@@ -57,7 +57,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navMenu">
         <div className="navbar-nav ms-auto d-flex align-items-center gap-2">
 
-          {/* 🔍 SEARCH + SUGGESTIONS */}
+          {/* SEARCH + SUGGESTIONS */}
           <div className="position-relative" style={{ width: "220px" }}>
             <div className="input-group">
               <span className="input-group-text">
@@ -80,23 +80,54 @@ const Navbar = () => {
             </div>
 
             {/* DROPDOWN */}
-            {showSuggestions && suggestions.length > 0 && (
-              <ul className="list-group position-absolute w-100 z-3">
-                {suggestions.slice(0, 5).map((item) => (
-                  <li
-                    key={item.id}
-                    className="list-group-item list-group-item-action"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setSearch(item.product_name);
-                      setShowSuggestions(false);
-                    }}
-                  >
-                    {item.product_name}
-                  </li>
-                ))}
-              </ul>
-            )}
+           {showSuggestions && suggestions.length > 0 && (
+  <ul
+    className="list-group position-absolute w-100"
+    style={{
+      top: "100%",
+      left: 0,
+      zIndex: 9999,
+      maxHeight: "250px",
+      overflowY: "auto"
+    }}
+  >
+    {suggestions.slice(0, 5).map((item) => (
+      <li
+        key={item.id}
+        className="list-group-item list-group-item-action d-flex align-items-center gap-2"
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+
+          setSearch(item.product_name);
+          setShowSuggestions(false);
+          window.location.href = `/#product-${item.id}`;
+        }}
+      >
+        {/* 🖼 IMAGE */}
+        <img
+          src={`http://dumafidel.alwaysdata.net/static/images/${item.product_photo}`}
+          alt=""
+          style={{
+            width: "40px",
+            height: "40px",
+            objectFit: "cover",
+            borderRadius: "5px"
+          }}
+        />
+
+        {/*  INFO */}
+        <div className="flex-grow-1">
+          <div style={{ fontSize: "14px", fontWeight: "500" }}>
+            {item.product_name}
+          </div>
+          <div style={{ fontSize: "12px", color: "gray" }}>
+            Ksh {item.product_cost}
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+)}
           </div>
 
           {/* SORT */}
