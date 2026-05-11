@@ -3,71 +3,127 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 
 const Signin = () => {
-    const [email, setEmail] = useState("")
+
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState("")
   const [error, setError] = useState("")
+
   const navigate = useNavigate()
 
-  // function to post data in the database
   const submit = async (e) => {
-    // prevent the form default behaviour of reloading
+
     e.preventDefault()
-    // updating the loading message
-    setLoading("Please wait as we log you in")
-    // adding user inputs to the database
+
+    setLoading("Please wait as we log you in...")
+    setError("")
+
     try {
-      // storing user inputs into data variables
+
+      // FORM DATA
       const data = new FormData()
+
       data.append("email", email)
       data.append("password", password)
 
-      // posting user into the database
-      const response = await axios.post("http://dumafidel.alwaysdata.net/api/signin" , data)
+      // API REQUEST
+      const response = await axios.post(
+        "http://dumafidel.alwaysdata.net/api/signin",
+        data
+      )
 
-      // updating the loading message to empty
+      console.log(response.data)
+
       setLoading("")
-      // checking if the user exists
+
+      // SUCCESS LOGIN
       if (response.data.user) {
-        // adding the user to the browser local storage
-        localStorage.setItem("user", JSON.stringify(response.data.user))
-        // redirecting user to the landing page
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(response.data.user)
+        )
+
         navigate("/")
 
-      }
-      else{
-        // if the log in fails 
+      } else {
+
         setError(response.data.message)
+
       }
 
     } catch (error) {
-      // updating loading message
+
       setLoading("")
-      // updating the error message
-      setError(error.response.data.message)
+
+      console.log(error)
+
+      setError("Login failed. Please try again.")
+
     }
+
   }
 
   return (
-    <div className='row mt-4 justify-content-center'>
-        <div className='col-md-6 card shadow p-4'>
-          <h2>Sign In</h2>
-          <form onSubmit={submit}>
-            {loading}
-            {error}
-            <input type="email" placeholder='Email' className='form-control' value={email} onChange={(e) => setEmail(e.target.value) 
-            } /> <br />
-            <input type="password" placeholder='Password' className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
-            <button className='btn btn-primary w-100' type='submit'>
-              Sign In
-            </button>
-            <p>Don't have an account? <Link to= "/signup">Sign Up</Link>  </p>
-            
-          </form>
 
-        </div>
+    <div className='row mt-4 justify-content-center'>
+
+      <div className='col-md-6 card shadow p-4'>
+
+        <h2>Sign In</h2>
+
+        <form onSubmit={submit}>
+
+          {loading && (
+            <p className='text-info'>{loading}</p>
+          )}
+
+          {error && (
+            <p className='text-danger'>{error}</p>
+          )}
+
+          <input
+            type="email"
+            placeholder='Email'
+            className='form-control'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <br />
+
+          <input
+            type="password"
+            placeholder='Password'
+            className='form-control'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <br />
+
+          <button
+            className='btn btn-primary w-100'
+            type='submit'
+          >
+            Sign In
+          </button>
+
+          <p className='mt-3'>
+            Don't have an account?
+            <Link to="/signup"> Sign Up</Link>
+          </p>
+
+        </form>
+
+      </div>
+
     </div>
+
   )
+
 }
 
 export default Signin

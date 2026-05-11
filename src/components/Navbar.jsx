@@ -103,7 +103,7 @@ const Navbar = () => {
           window.location.href = `/#product-${item.id}`;
         }}
       >
-        {/* 🖼 IMAGE */}
+        {/*  IMAGE */}
         <img
           src={`http://dumafidel.alwaysdata.net/static/images/${item.product_photo}`}
           alt=""

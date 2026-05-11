@@ -7,14 +7,14 @@ const Chatbot = () => {
     {
       sender: "bot",
       type: "text",
-      content: "Hey 👋 Welcome to Cova Kicks! Ask me about shoes."
+      content: "Hi 👋 Welcome to Cova Kicks! Ask me about shoes."
     }
   ]);
   const [input, setInput] = useState("");
 
   const { products } = useContext(CartContext);
 
-  // ⭐ STAR FUNCTION
+  //  STAR FUNCTION
   const renderStars = (rating = 0) => {
     const full = Math.floor(rating);
     const empty = 5 - full;
@@ -221,7 +221,7 @@ const Chatbot = () => {
                       <div style={{ fontSize: "13px" }}>
                         <div><b>{p.product_name}</b></div>
 
-                        {/* ⭐ RATINGS (random fallback if no DB rating) */}
+                        {/*  RATINGS (random fallback if no DB rating) */}
                         {renderStars(p.product_rating || Math.random() * 5)}
 
                         <div>Ksh {p.product_cost}</div>
