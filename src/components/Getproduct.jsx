@@ -13,7 +13,7 @@ const Getproduct = () => {
   const img_url = "http://dumafidel.alwaysdata.net/static/images/";
   const navigate = useNavigate();
 
-  // FETCH PRODUCTS
+  // FETCH PRODUCTSs
   const getproducts = async () => {
     setLoading("Please wait as we retrieve products...");
     try {
